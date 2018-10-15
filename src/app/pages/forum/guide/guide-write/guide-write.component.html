@@ -1,0 +1,76 @@
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('assets/img/clean/home-bg.jpg')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="site-heading">
+          <h1>가이드</h1>
+          <span class="subheading">가이드는 WYSINWYG 형태로 다양하게 작성할 수 있습니다.</span>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <div class="container-fluid padding">
+      <div class="row padding">
+        <div class="col-lg-12">
+          <form name="sentMessage" id="guideForm" novalidate="novalidate" [formGroup]="registerForm" (ngSubmit)="onSubmit(fileInput.files)">
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                <label>카테고리</label>
+                <select class="form-control" formControlName="category" (change)="selectChangeTemplateHandler($event)">
+                    <option value="guide" selected>기타 가이드</option>
+                    <option value="document">도큐멘트</option>
+                </select>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                <label>관람자</label>
+                <angular2-multiselect *ngIf="showPermit==1" [data]="dropdownList" formControlName="selectedItems" 
+                  [settings]="dropdownSettings" 
+                  (onSelect)="onItemSelect($event)" 
+                  (onDeSelect)="OnItemDeSelect($event)"
+                  (onSelectAll)="onSelectAll($event)"
+                  (onDeSelectAll)="onDeSelectAll($event)"
+                  >
+                </angular2-multiselect>
+                <p *ngIf="showPermit==0">관람자가 필요 없는 카테고리 입니다.</p>
+              </div>
+            </div>
+            
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                <label>제목</label>
+                <input class="form-control" id="phone" type="text" placeholder="Title" formControlName="title" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+                <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                  <div *ngIf="f.title.errors.required">제목을 입력하시요.</div>
+                </div>
+
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                <label>본문</label>
+                <ckeditor  formControlName="content"></ckeditor>
+              </div>
+            </div>
+            <div class="control-group">
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                    <label>첨부파일</label>
+                    <input type="file" class="form-control" (change)="onFileChange(fileInput.files)" #fileInput />
+                </div>
+            </div>
+            <br>
+            <div id="success"></div>
+            <div class="form-group">
+              <button class="btn btn-primary btn-xl" id="sendMessageButton" [disabled]="!registerForm.valid">등록</button>
+            </div>
+          </form>
+        </div>
+      </div>
+          
+    </div>

@@ -1,0 +1,77 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* nanum-gothic-regular - korean_latin */
+@font-face {
+    font-family: 'Nanum Gothic';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./assets/fonts/nanum-gothic-v11-korean_latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('NanumGothic'),
+         url('./assets/fonts/nanum-gothic-v11-korean_latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('./assets/fonts/nanum-gothic-v11-korean_latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('./assets/fonts/nanum-gothic-v11-korean_latin-regular.woff') format('woff'), /* Modern Browsers */
+         url('./assets/fonts/nanum-gothic-v11-korean_latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('./assets/fonts/nanum-gothic-v11-korean_latin-regular.svg#NanumGothic') format('svg'); /* Legacy iOS */
+  }
+  /* nanum-gothic-700 - korean_latin */
+  @font-face {
+    font-family: 'Nanum Gothic';
+    font-style: normal;
+    font-weight: 700;
+    src: url('./assets/fonts/nanum-gothic-v11-korean_latin-700.eot'); /* IE9 Compat Modes */
+    src: local('NanumGothic Bold'), local('NanumGothic-Bold'),
+         url('./assets/fonts/nanum-gothic-v11-korean_latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('./assets/fonts/nanum-gothic-v11-korean_latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+         url('./assets/fonts/nanum-gothic-v11-korean_latin-700.woff') format('woff'), /* Modern Browsers */
+         url('./assets/fonts/nanum-gothic-v11-korean_latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('./assets/fonts/nanum-gothic-v11-korean_latin-700.svg#NanumGothic') format('svg'); /* Legacy iOS */
+  }
+  /* nanum-gothic-800 - korean_latin */
+  @font-face {
+    font-family: 'Nanum Gothic';
+    font-style: normal;
+    font-weight: 800;
+    src: url('./assets/fonts/nanum-gothic-v11-korean_latin-800.eot'); /* IE9 Compat Modes */
+    src: local('NanumGothic ExtraBold'), local('NanumGothic-ExtraBold'),
+         url('./assets/fonts/nanum-gothic-v11-korean_latin-800.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('./assets/fonts/nanum-gothic-v11-korean_latin-800.woff2') format('woff2'), /* Super Modern Browsers */
+         url('./assets/fonts/nanum-gothic-v11-korean_latin-800.woff') format('woff'), /* Modern Browsers */
+         url('./assets/fonts/nanum-gothic-v11-korean_latin-800.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('./assets/fonts/nanum-gothic-v11-korean_latin-800.svg#NanumGothic') format('svg'); /* Legacy iOS */
+  }
+
+/***
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: 'Nanum Gothic', sans-serif;
+  color: #222;
+}
+***/
+
+.navbar {
+  padding: .8rem;
+}
+.navbar-nav li {
+  padding-right: 20px;
+}
+.nav-link {
+  font-size: 1.1em !important;
+}
+
+/*
+  Extra small (xs) devices (portrait phones, less than 567px)
+  No media query since this is the default in Bootstrap
+
+  Small (sm) devices (landscape phones, 576px and up)
+  @media (min-width: 576px) { ... }
+
+  Medium (md) devices (tablets, 768px and up)
+  @media (min-width: 768px) { ... }
+
+  Large (lg) devices (desktops, 992px and up)
+  @media (min-width: 992px) { ... }
+
+  Extra (xl) large devices (large desktops, 1200px and up)
+  @media (min-width: 1200px) { ... }
+  */
