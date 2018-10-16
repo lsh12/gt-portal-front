@@ -1,9 +1,7 @@
 //export const base_prefix = 'https://apipt.uy.to/ssgpay';
-export const base_prefix = 'http://apipt.ssgpay.com:8080/ssgpay';
+//export const base_prefix = 'http://apipt.ssgpay.com:8080/ssgpay';
 //export const base_prefix = '/ssgpay';
-
-export const authenticate = '/api/v1/authenticate';
-export const session = '/api/v1/session';
+export const base_prefix = 'http://apipt.genesis.tech:8080/gtapi';
 
 export const forum_topic_list = '/api/v1/topics';
 export const forum_answer_list = '/api/v1/answers';
@@ -27,9 +25,7 @@ export const download_file_id = '/api/v1/files/downloadByFileId';
 export const upload_file= '/api/v1/files/uploadFile';
 export const upload_image_file= '/api/v1/files/uploadImageFile';
 
-export const authenticateUrl = base_prefix + authenticate;
-export const sessionUrl = base_prefix + session;
-export const userBySessionUrl = base_prefix + forum_user_session;
+export const userSessionUrl = base_prefix + forum_user_session;
 export const topicUrl = base_prefix + forum_topic_list;
 
 export const answerTopicUrl = base_prefix + forum_topics_answer;

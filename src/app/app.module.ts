@@ -20,6 +20,8 @@ import { QnaDetailComponent } from './pages/forum/qna/qna-detail/qna-detail.comp
 import { QnaWriteComponent } from './pages/forum/qna/qna-write/qna-write.component';
 import { DocumentComponent } from './pages/forum/document/document.component';
 import { DocumentDetailComponent } from './pages/forum/document/document-detail/document-detail.component';
+import { HeaderComponent } from './pages/header/header.component';
+import { FooterComponent } from './pages/footer/footer.component';
 
 
 
@@ -36,6 +38,8 @@ import { DocumentDetailComponent } from './pages/forum/document/document-detail/
     QnaWriteComponent,
     DocumentComponent,
     DocumentDetailComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
