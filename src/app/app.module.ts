@@ -51,7 +51,7 @@ import { FooterComponent } from './pages/footer/footer.component';
     AngularMultiSelectModule,
     NgxPaginationModule
   ],
-  providers: [ {provide: APP_BASE_HREF, useValue: '/apiportal'} ],
+  providers: [ {provide: APP_BASE_HREF, useValue: '/gtportal'} ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -40,16 +40,19 @@
          url('./assets/fonts/nanum-gothic-v11-korean_latin-800.svg#NanumGothic') format('svg'); /* Legacy iOS */
   }
 
-/***
-html, body {
-  height: 100%;
-  width: 100%;
-  font-family: 'Nanum Gothic', sans-serif;
-  color: #222;
-}
-***/
-
-
+  body {
+    font-family: 'Nanum Gothic', sans-serif;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
+  }
 
 /*
   Extra small (xs) devices (portrait phones, less than 567px)
