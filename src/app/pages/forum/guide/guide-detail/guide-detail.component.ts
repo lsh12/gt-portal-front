@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import '../../../../common/ckeditor.loader';
 import 'ckeditor';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { ForumService } from '../../../../services/forum.service';
 
 @Component({

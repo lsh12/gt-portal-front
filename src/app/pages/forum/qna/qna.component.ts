@@ -41,7 +41,6 @@ export class QnaComponent implements OnInit {
       console.log(data);
       
       this.collection = data['content'];
-      //this.size= data['size'];
       this.total= data['totalElements'];
       
       console.log('this.total',this.total);

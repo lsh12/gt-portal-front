@@ -3,8 +3,6 @@ import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import '../../../../common/ckeditor.loader';
 import 'ckeditor';
 import * as urls from "../../../../common/urls";
-import { CkeditorConfigService } from '../../../../services/ckeditor-config.service';
-import { APP_BASE_HREF } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
@@ -26,7 +24,7 @@ export class GuideWriteComponent implements OnInit {
   submitted = false;
 
   // multi-dropdown
-  dropdownList = [];
+  dropdownList:any = [];
   selectedItems = [];
   dropdownSettings = {};
 
@@ -34,12 +32,12 @@ export class GuideWriteComponent implements OnInit {
 
   selectedTemplate: string = '';
 
-
-  constructor(private ckService: CkeditorConfigService, 
+  constructor(
               private formBuilder: FormBuilder, 
-              private _http: HttpClient,
               private forumService:ForumService,
-              private router: Router) {
+              private router: Router,
+              private http: HttpClient
+  ) {
     
     this.registerForm = this.formBuilder.group({
       title: ['', Validators.required],
@@ -48,20 +46,37 @@ export class GuideWriteComponent implements OnInit {
       file: [''],
       selectedItems: [[]]
     });
+    
+  }
 
+  ngOnInit() {
+
+    
+    
     this.forumService.getGuideSpectator().subscribe(data =>{
-      this.dropdownList = JSON.parse(JSON.stringify(data));
+      console.log(data);
+      //console.log(JSON.stringify(data));
+      //this.dropdownList = data;
+      //console.log(this.dropdownList);
+      
 
-      console.log(this.dropdownList);
     }
     ,
     (err)=>{
         console.log(err,err.message);
       }
     );
-
-
-    /*
+    
+    this.dropdownSettings = { 
+      singleSelection: false,
+      text:"관람자 선택",
+      selectAllText:'전부 선택',
+      unSelectAllText:'전부 해제',
+      searchPlaceholderText: 'Search Fields',
+      enableSearchFilter: true,
+      badgeShowLimit: 5,
+      groupBy: "category"
+    };
 
     this.dropdownList = [
       { "id": 1, "itemName": "India", "category": "asia" },
@@ -72,24 +87,27 @@ export class GuideWriteComponent implements OnInit {
       { "id": 6, "itemName": "Sweden", "category": "Europe" },
     ];
 
+    /*
+   this.http.get('https://restcountries.eu/rest/v2/all')
+        .subscribe(res => {
+            console.log(res);
+            this.dropdownList = res;
+        },error => {
+
+        });  
+
+    this.dropdownSettings = {
+      text: "Select Countries",
+            selectAllText: 'Select All',
+            unSelectAllText: 'UnSelect All',
+            classes: "myclass custom-class",
+            primaryKey: "alpha3Code",
+            labelKey: "name",
+            enableSearchFilter: true,
+            searchBy: ['name','capital']
+    }
     */
 
-    this.selectedItems = [
-        
-    ];
-    this.dropdownSettings = { 
-          singleSelection: false, 
-          text:"관람자 선택",
-          selectAllText:'전부 선택',
-          unSelectAllText:'전부 해제',
-          enableSearchFilter: true,
-          enableFilterSelectAll: false,
-          groupBy:"category"
-        };            
-  }
-
-  ngOnInit() {
-    //this.ckeditorConfig=this.ckService.getConfig();
   }
 
   ngAfterViewChecked() {
@@ -197,16 +215,18 @@ export class GuideWriteComponent implements OnInit {
   // multi drop list
   onItemSelect(item: any) {
     console.log(item);
-    //console.log(this.registerForm.get('selectedItems').value);
+    console.log(this.registerForm.get('selectedItems').value);
   }
   OnItemDeSelect(item: any) {
       console.log(item);
-      console.log(this.selectedItems);
+      console.log(this.registerForm.get('selectedItems').value);
   }
   onSelectAll(items: any) {
       console.log(items);
+      console.log(this.registerForm.get('selectedItems').value);
   }
   onDeSelectAll(items: any) {
       console.log(items);
+      console.log(this.registerForm.get('selectedItems').value);
   }
 }
