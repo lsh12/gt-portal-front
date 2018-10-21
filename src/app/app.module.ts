@@ -22,6 +22,8 @@ import { DocumentComponent } from './pages/forum/document/document.component';
 import { DocumentDetailComponent } from './pages/forum/document/document-detail/document-detail.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { FooterComponent } from './pages/footer/footer.component';
+import { QnaEditComponent } from './pages/forum/qna/qna-edit/qna-edit.component';
+import { GuideEditComponent } from './pages/forum/guide/guide-edit/guide-edit.component';
 
 
 
@@ -40,6 +42,8 @@ import { FooterComponent } from './pages/footer/footer.component';
     DocumentDetailComponent,
     HeaderComponent,
     FooterComponent,
+    QnaEditComponent,
+    GuideEditComponent,
   ],
   imports: [
     BrowserModule,

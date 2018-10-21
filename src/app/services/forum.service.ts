@@ -42,6 +42,12 @@ export class ForumService {
     return this._http.delete(urls.qnaDeleteUrl+'/'+topicId);
   }
 
+  getDocumentList(page:number, size:number) {
+    return this._http.get(urls.documentListUrl+'?page='+page+'&size='+size, {
+      reportProgress: true,
+    });
+  }
+
   getDocumentDetail(topicTitle:string) {
     return this._http.get(urls.documentDetailUrl+'/'+topicTitle);
   }
@@ -53,6 +59,10 @@ export class ForumService {
     return this._http.get(downloadUrl,{ responseType: 'blob' });
   }
 
+  deleteAttachFile(fileId) {
+    return this._http.delete(urls.deleteAttchFileUrl+'/'+fileId);
+  }
+  
   postGuideAnswer(topicId,formData) {
     return this._http.post(urls.answerTopicUrl+'/'+topicId, formData);
   }
@@ -63,6 +73,10 @@ export class ForumService {
 
   postGuide(formData) {
     return this._http.post(urls.topicUrl, formData);
+  }
+
+  updateGuide(topicId, formData) {
+    return this._http.post(urls.topicUrl+'/'+topicId, formData);
   }
 
   postQna(formData) {

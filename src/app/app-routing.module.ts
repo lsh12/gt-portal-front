@@ -9,6 +9,9 @@ import { QnaComponent } from './pages/forum/qna/qna.component';
 import { QnaWriteComponent } from './pages/forum/qna/qna-write/qna-write.component';
 import { QnaDetailComponent } from './pages/forum/qna/qna-detail/qna-detail.component';
 import { DocumentDetailComponent } from './pages/forum/document/document-detail/document-detail.component';
+import { DocumentComponent } from './pages/forum/document/document.component';
+import { QnaEditComponent } from './pages/forum/qna/qna-edit/qna-edit.component';
+import { GuideEditComponent } from './pages/forum/guide/guide-edit/guide-edit.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -16,12 +19,15 @@ const routes: Routes = [
   { path: 'forum/guide', component: GuideComponent },
   { path: 'forum/guide/write', component: GuideWriteComponent },
   { path: 'forum/guide/detail/:id', component: GuideDetailComponent },
+  { path: 'forum/guide/edit/:id', component: GuideEditComponent },
 
   { path: 'forum/qna', component: QnaComponent },
   { path: 'forum/qna/write', component: QnaWriteComponent },
   { path: 'forum/qna/detail/:id', component: QnaDetailComponent },
+  { path: 'forum/qna/edit/:id', component: QnaEditComponent },
 
-  { path: 'forum/document/detail/:title', component: DocumentDetailComponent },
+  { path: 'forum/document', component: DocumentComponent },
+  { path: 'forum/document/detail/:subTitle', component: DocumentDetailComponent },
 
 
   {

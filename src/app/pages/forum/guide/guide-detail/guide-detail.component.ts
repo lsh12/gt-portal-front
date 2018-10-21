@@ -121,7 +121,7 @@ export class GuideDetailComponent implements OnInit {
     console.log(formData);
     this._forumService.postGuideAnswer(this.topic_data.id, formData)
       .subscribe(res => {
-        
+        this.getGuideDetail();
         console.log(res);
     });
     

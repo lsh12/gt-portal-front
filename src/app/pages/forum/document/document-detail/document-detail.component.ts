@@ -9,7 +9,7 @@ import { ForumService } from '../../../../services/forum.service';
   styleUrls: ['./document-detail.component.css']
 })
 export class DocumentDetailComponent implements OnInit {
-  topic_title:string;
+  topic_subTitle:string;
   topic_data:any={};
   topic_user:any={};
   topic_answers:Array<any>=[];
@@ -26,7 +26,7 @@ export class DocumentDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private _forumService:ForumService, private router: Router) {
     this.route.params.subscribe(res => 
-      this.topic_title=res.title
+      this.topic_subTitle=res.subTitle
     );
   }
 
@@ -35,7 +35,7 @@ export class DocumentDetailComponent implements OnInit {
   }
 
   getDocumentDetail() {
-    this._forumService.getDocumentDetail(this.topic_title).subscribe(data =>{
+    this._forumService.getDocumentDetail(this.topic_subTitle).subscribe(data =>{
       console.log(data);
       this.topic_data=data;
       this.topic_user=data['user'];

@@ -1,2 +1,2 @@
 declare const CKEDITOR;
-window['CKEDITOR_BASEPATH'] = '/ssgpay/assets/js/ckeditor/';
+window['CKEDITOR_BASEPATH'] = '/gtportal/assets/js/ckeditor/';

@@ -1,25 +1,29 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import '../../../../common/ckeditor.loader';
 import 'ckeditor';
-import * as urls from "../../../../common/urls";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-
-import { Router } from '@angular/router';
 import { ForumService } from '../../../../services/forum.service';
 
 @Component({
-  selector: 'app-guide-write',
-  templateUrl: './guide-write.component.html',
-  styleUrls: ['./guide-write.component.css']
+  selector: 'app-guide-edit',
+  templateUrl: './guide-edit.component.html',
+  styleUrls: ['./guide-edit.component.css']
 })
-export class GuideWriteComponent implements OnInit {
+export class GuideEditComponent implements OnInit {
+
+  topic_id:number=0;
+  topic_data:any={};
+  topic_user:any={};
+  topic_answers:Array<any>=[];
+  topic_attach_file:Array<any>=[];
+  current_user:any={};
+
+  // answer
   ckeditorContent: string = '<p>Some html</p>';
   ckeditorConfig: any;
 
   // form
-  title: String = '';
   registerForm: FormGroup;
   submitted = false;
 
@@ -35,21 +39,28 @@ export class GuideWriteComponent implements OnInit {
 
   isSubTitle: boolean = false;
 
-  constructor(
-              private formBuilder: FormBuilder, 
-              private forumService:ForumService,
-              private router: Router,
-              private http: HttpClient
-  ) {
-    
+  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private _forumService:ForumService, private router: Router) {
+    this.route.params.subscribe(res => 
+      this.topic_id=res.id
+    );
+
     this.registerForm = this.formBuilder.group({
       title: ['', Validators.required],
       subTitle: [''],
-      category: ['guide'],
+      category: [''],
       content: ['', Validators.required],
       file: [''],
       selectedItems: [[]]
     });
+    
+    this._forumService.getGuideSpectator().subscribe(data =>{
+      this.dropdownList = data;
+    }
+    ,
+    (err)=>{
+        console.log(err,err.message);
+      }
+    );
     
     this.dropdownSettings = { 
       singleSelection: false,
@@ -65,22 +76,44 @@ export class GuideWriteComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.forumService.getGuideSpectator().subscribe(data =>{
-      this.dropdownList = data;
-      
+    this.getGuideDetail();
+
+  }
+
+  getGuideDetail() {
+    this._forumService.getGuideDetail(this.topic_id).subscribe(data =>{
+      console.log(data);
+      this.topic_data=data;
+      this.topic_user=data['user'];
+      this.topic_answers=data['answers'];
+      this.topic_attach_file=data['attachFile'];
+
+      this.registerForm.controls['category'].setValue(this.topic_data.category);
+      this.registerForm.controls['title'].setValue(this.topic_data.title);
+      this.registerForm.controls['content'].setValue(this.topic_data.content);
+
+
     }
     ,
     (err)=>{
         console.log(err,err.message);
       }
     );
-  }
-
-  ngAfterViewChecked() {
-    CKEDITOR.config.filebrowserUploadUrl = urls.uploadImageFileIdUrl;
     
+    /*
+    this._forumUserService.getUserSession().subscribe(data =>{
+      console.log(data);
+      this.current_user=data['user'];
+     
+    }
+    ,
+    (err)=>{
+        console.log(err,err.message);
+      }
+    );
+    */
   }
-
+  
   //event handler for the select element's change event
   selectChangeTemplateHandler (event: any) {
     //update the ui
@@ -101,7 +134,7 @@ export class GuideWriteComponent implements OnInit {
     }
 
   }
-
+  
   // 첨부파일
   get f() { return this.registerForm.controls; }
 
@@ -123,6 +156,44 @@ export class GuideWriteComponent implements OnInit {
         //this.cd.markForCheck();
       };
     }
+  }
+
+  downloadFile(attach_file) {
+    console.log('downloadFile:'+attach_file.id);
+
+    this._forumService.downloadByFileUrl(attach_file.fileDownloadUri).subscribe(data =>{
+      console.log(data);
+      
+      window.URL.createObjectURL(data);
+
+      var url = window.URL.createObjectURL(data);
+      var a = document.createElement('a');
+      document.body.appendChild(a);
+      a.setAttribute('style', 'display: none');
+      a.href = url;
+      a.download = attach_file.fileName;
+      a.click();
+      window.URL.revokeObjectURL(url);
+      a.remove(); // remove the element
+    }
+    ,
+    (err)=>{
+        console.log(err,err.message);
+      }
+    );
+
+  }
+
+  deleteFile(attach_file) {
+    this._forumService.deleteAttachFile(attach_file.id).subscribe(data =>{
+      console.log(data);
+      this.getGuideDetail();
+    }
+    ,
+    (err)=>{
+        console.log(err,err.message);
+      }
+    );  
   }
 
   // form summit
@@ -174,29 +245,25 @@ export class GuideWriteComponent implements OnInit {
     console.log(formData);
     
     
-    this.forumService.postGuide(formData)
+    this._forumService.updateGuide(this.topic_id,formData)
       .subscribe(res => {
         this.router.navigate(['/forum/guide']);
         console.log(res);
     });
-    
   }
 
-  // multi drop list
-  onItemSelect(item: any) {
-    console.log(item);
-    console.log(this.registerForm.get('selectedItems').value);
+  // delete guide
+  deleteGuide(){
+    console.log(this.topic_id);
+    this._forumService.deleteGuide(this.topic_id).subscribe(data =>{
+      console.log(data);
+      this.router.navigate(['/forum/guide']);
+    }
+    ,
+    (err)=>{
+        console.log(err,err.message);
+      }
+    );
   }
-  OnItemDeSelect(item: any) {
-      console.log(item);
-      console.log(this.registerForm.get('selectedItems').value);
-  }
-  onSelectAll(items: any) {
-      console.log(items);
-      console.log(this.registerForm.get('selectedItems').value);
-  }
-  onDeSelectAll(items: any) {
-      console.log(items);
-      console.log(this.registerForm.get('selectedItems').value);
-  }
+
 }

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ForumService } from '../../../../services/forum.service';
+import { ForumService } from 'src/app/services/forum.service';
 
 @Component({
-  selector: 'app-qna-detail',
-  templateUrl: './qna-detail.component.html',
-  styleUrls: ['./qna-detail.component.css']
+  selector: 'app-qna-edit',
+  templateUrl: './qna-edit.component.html',
+  styleUrls: ['./qna-edit.component.css']
 })
-export class QnaDetailComponent implements OnInit {
+export class QnaEditComponent implements OnInit {
   topic_id:number=0;
   topic_data:any={};
   topic_user:any={};
