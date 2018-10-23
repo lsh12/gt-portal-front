@@ -71,7 +71,11 @@ header.masthead .site-heading .subheading {
   }
 
   .showcase .showcase-text {
-    padding: 7rem;
+    padding: 5rem;
+  }
+
+  .showcase-text > .btn {
+    margin-top: 1rem;
   }
 
 }

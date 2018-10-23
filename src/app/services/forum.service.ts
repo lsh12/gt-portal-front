@@ -18,6 +18,10 @@ export class ForumService {
     return this._http.get(urls.guideDetailUrl+'/'+topicId);
   }
 
+  getGuideEdit(topicId:number) {
+    return this._http.get(urls.guideEditUrl+'/'+topicId);
+  }
+
   deleteGuide(topicId) {
     return this._http.delete(urls.guideDeleteUrl+'/'+topicId);
   }

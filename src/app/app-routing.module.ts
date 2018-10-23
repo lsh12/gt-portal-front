@@ -12,6 +12,7 @@ import { DocumentDetailComponent } from './pages/forum/document/document-detail/
 import { DocumentComponent } from './pages/forum/document/document.component';
 import { QnaEditComponent } from './pages/forum/qna/qna-edit/qna-edit.component';
 import { GuideEditComponent } from './pages/forum/guide/guide-edit/guide-edit.component';
+import { ImageComponent } from './pages/forum/image/image.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'forum/document', component: DocumentComponent },
   { path: 'forum/document/detail/:subTitle', component: DocumentDetailComponent },
 
+  { path: 'forum/image', component: ImageComponent },
 
   {
     path: '',

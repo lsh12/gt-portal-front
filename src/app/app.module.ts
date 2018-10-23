@@ -24,6 +24,7 @@ import { HeaderComponent } from './pages/header/header.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { QnaEditComponent } from './pages/forum/qna/qna-edit/qna-edit.component';
 import { GuideEditComponent } from './pages/forum/guide/guide-edit/guide-edit.component';
+import { ImageComponent } from './pages/forum/image/image.component';
 
 
 
@@ -44,6 +45,7 @@ import { GuideEditComponent } from './pages/forum/guide/guide-edit/guide-edit.co
     FooterComponent,
     QnaEditComponent,
     GuideEditComponent,
+    ImageComponent,
   ],
   imports: [
     BrowserModule,

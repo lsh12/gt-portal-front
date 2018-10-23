@@ -38,8 +38,7 @@ export class GuideWriteComponent implements OnInit {
   constructor(
               private formBuilder: FormBuilder, 
               private forumService:ForumService,
-              private router: Router,
-              private http: HttpClient
+              private router: Router
   ) {
     
     this.registerForm = this.formBuilder.group({
@@ -125,6 +124,11 @@ export class GuideWriteComponent implements OnInit {
     }
   }
 
+  // back
+  onBack() {
+    this.router.navigate(['/forum/guide']);
+  }
+
   // form summit
   onSubmit(files: FileList) {
     this.submitted = true;
@@ -176,8 +180,12 @@ export class GuideWriteComponent implements OnInit {
     
     this.forumService.postGuide(formData)
       .subscribe(res => {
-        this.router.navigate(['/forum/guide']);
-        console.log(res);
+        if(formValue.category == 'document') {
+          this.router.navigate(['/forum/document']);
+        }
+        else {
+          this.router.navigate(['/forum/guide']);
+        }
     });
     
   }

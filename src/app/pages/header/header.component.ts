@@ -16,7 +16,6 @@ export class HeaderComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    /*
     this.userService.getUserSession().subscribe(data =>{
       console.log(data);
       this.current_user=data['user'];
@@ -26,8 +25,7 @@ export class HeaderComponent implements OnInit {
         console.log(err,err.message);
       }
     );
-    */
-    
+    /*
     this.mockService.getUserSession().subscribe((data: any) => {
       console.log(data);
       this.current_user=data['user'];
@@ -37,7 +35,7 @@ export class HeaderComponent implements OnInit {
         console.log(err,err.message);
       }
     );
-    
+    */
   }
 
 

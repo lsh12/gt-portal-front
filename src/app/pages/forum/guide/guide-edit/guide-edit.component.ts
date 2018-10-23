@@ -54,6 +54,7 @@ export class GuideEditComponent implements OnInit {
     });
     
     this._forumService.getGuideSpectator().subscribe(data =>{
+      console.log(data);
       this.dropdownList = data;
     }
     ,
@@ -62,6 +63,7 @@ export class GuideEditComponent implements OnInit {
       }
     );
     
+
     this.dropdownSettings = { 
       singleSelection: false,
       text:"관람자 선택",
@@ -73,26 +75,36 @@ export class GuideEditComponent implements OnInit {
       groupBy: "category"
     };
 
+    
+
+
   }
 
   ngOnInit() {
-    this.getGuideDetail();
+    this.getGuideEdit();
 
   }
 
-  getGuideDetail() {
-    this._forumService.getGuideDetail(this.topic_id).subscribe(data =>{
+  getGuideEdit() {
+    this._forumService.getGuideEdit(this.topic_id).subscribe(data =>{
       console.log(data);
-      this.topic_data=data;
-      this.topic_user=data['user'];
-      this.topic_answers=data['answers'];
-      this.topic_attach_file=data['attachFile'];
+      this.topic_data=data['topic'];
+      this.topic_user=this.topic_data['user'];
+      this.topic_answers=this.topic_data['answers'];
+      this.topic_attach_file=this.topic_data['attachFile'];
 
       this.registerForm.controls['category'].setValue(this.topic_data.category);
       this.registerForm.controls['title'].setValue(this.topic_data.title);
       this.registerForm.controls['content'].setValue(this.topic_data.content);
 
+      
+      // permit 
+      this.selectedItems = data['cumsumer'];
 
+      if(this.topic_data.category == 'document') {
+        this.showPermit = 0;
+        this.registerForm.controls['subTitle'].setValue(this.topic_data.subTitle);
+      }
     }
     ,
     (err)=>{
@@ -187,7 +199,7 @@ export class GuideEditComponent implements OnInit {
   deleteFile(attach_file) {
     this._forumService.deleteAttachFile(attach_file.id).subscribe(data =>{
       console.log(data);
-      this.getGuideDetail();
+      this.getGuideEdit();
     }
     ,
     (err)=>{
@@ -244,26 +256,36 @@ export class GuideEditComponent implements OnInit {
 
     console.log(formData);
     
-    
     this._forumService.updateGuide(this.topic_id,formData)
       .subscribe(res => {
-        this.router.navigate(['/forum/guide']);
+
+        if(this.topic_data.category == 'document') {
+          this.router.navigate(['/forum/document']);
+        }
+        else {
+          this.router.navigate(['/forum/guide']);
+        }
         console.log(res);
     });
   }
 
-  // delete guide
-  deleteGuide(){
-    console.log(this.topic_id);
-    this._forumService.deleteGuide(this.topic_id).subscribe(data =>{
-      console.log(data);
-      this.router.navigate(['/forum/guide']);
-    }
-    ,
-    (err)=>{
-        console.log(err,err.message);
-      }
-    );
+  // multi drop list
+  onItemSelect(item: any) {
+    console.log(item);
+    console.log(this.registerForm.get('selectedItems').value);
   }
+  OnItemDeSelect(item: any) {
+      console.log(item);
+      console.log(this.registerForm.get('selectedItems').value);
+  }
+  onSelectAll(items: any) {
+      console.log(items);
+      console.log(this.registerForm.get('selectedItems').value);
+  }
+  onDeSelectAll(items: any) {
+      console.log(items);
+      console.log(this.registerForm.get('selectedItems').value);
+  }
+
 
 }

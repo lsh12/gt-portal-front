@@ -66,6 +66,11 @@ export class QnaWriteComponent implements OnInit {
     }
   }
 
+  // back
+  onBack() {
+    this.router.navigate(['/forum/qna']);
+  }
+
   // form summit
   onSubmit(files: FileList) {
     this.submitted = true;

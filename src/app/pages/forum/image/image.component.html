@@ -1,0 +1,112 @@
+<main role="main">
+
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">이미지 관리</h1>
+      <p class="lead text-muted">가이드나 안내 문서를 작성시 본문에 삽입되는 이미지를 관리합니다. 원하는 이미지의 상세 버튼을 클릭하고 이미지 URL을 선택하여 본문 HTML에 입력하시기 바랍니다.</p>
+      <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target=".upload-image-modal">이미지 올리기</button>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-4" *ngFor="let item of collection | paginate: { itemsPerPage: size, currentPage: p, totalItems: total}">
+          <div class="card mb-4 shadow-sm">
+            <img class="card-img-top" data-src="{{item.fileDownloadUri}}" alt="Card image cap">
+            <div class="card-body">
+              <p class="card-text">
+                {{item.fileName}}
+                <br>
+                {{item.description}}
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary" (click)="deleteImage(item.id)">삭제</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target=".view-image-modal" (click)="setValue(item)">상세</button>
+                </div>
+                <small class="text-muted">{{item.createdDate}}</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade view-image-modal" tabindex="-1" role="dialog" aria-labelledby="image upload" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">{{modal_item.fileName}}</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <img src="{{modal_item.fileDownloadUri}}" class="img-fluid" alt="Responsive image">
+                      <p></p>
+                      <div class="input-group mb-3">
+                          <input id="fileDownloadUri" type="text" class="form-control" value="{{modal_item.fileDownloadUri}}">
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" id="btnCopy" data-clipboard-target="#fileDownloadUri">복사</button>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                    </div>
+                </div>
+               </div>
+            </div>
+
+        </div>
+        
+      </div>
+      <pagination-controls (pageChange)="pageChanged($event)" directionLinks="true"
+            autoHide="true"
+            responsive="true"
+            previousLabel="이전"
+            nextLabel="다음"
+            screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page"
+            screenReaderCurrentLabel="You're on page">
+      </pagination-controls>
+    </div>
+  </div>
+  
+</main>
+
+<div class="modal fade upload-image-modal" tabindex="-1" role="dialog" aria-labelledby="image upload" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">이미지 업로드</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form name="sentMessage" id="imageForm" novalidate="novalidate" [formGroup]="registerForm" (ngSubmit)="onSubmit(fileInput.files)">
+              <div class="control-group">
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                  <label>설명</label>
+                  <input class="form-control" id="description" type="text" placeholder="설명" formControlName="description">
+                </div>
+              </div>
+              <div class="control-group">
+                  <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                      <label>첨부파일</label>
+                      <input type="file" class="form-control" #fileInput formControlName="file" />
+                  </div>
+              </div>
+              <br>
+              <div class="form-group">
+                <button class="btn btn-primary btn-xl" id="sendMessageButton" [disabled]="!registerForm.valid">등록</button>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            
+          </div>
+      </div>
+     </div>
+  </div>

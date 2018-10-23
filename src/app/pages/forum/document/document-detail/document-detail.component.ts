@@ -51,6 +51,11 @@ export class DocumentDetailComponent implements OnInit {
     
   }
 
+  // back
+  onBack() {
+    this.router.navigate(['/forum/document']);
+  }
+
   downloadFile(attach_file) {
     console.log('downloadFile:'+attach_file.id);
 

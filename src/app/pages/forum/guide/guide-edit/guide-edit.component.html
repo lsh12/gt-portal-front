@@ -17,6 +17,11 @@
 <div class="container-fluid padding">
   <div class="row padding">
     <div class="col-lg-12">
+      <div class="alert alert-warning" role="alert">
+          <a routerLink="/forum/image" class="btn btn-sm btn-outline-secondary" target="_blank">
+            이미지 관리</a>
+          <span>&nbsp;본문에 삽입할 이미지를 선택할 수 있습니다.</span>
+      </div>
       <form name="sentMessage" id="guideForm" novalidate="novalidate" [formGroup]="registerForm" (ngSubmit)="onSubmit(fileInput.files)">
         <div class="control-group">
           <div class="form-group floating-label-form-group controls mb-0 pb-2">
@@ -31,6 +36,7 @@
           <div class="form-group floating-label-form-group controls mb-0 pb-2">
             <label>관람자</label>
             <angular2-multiselect  [data]="dropdownList" 
+              [(ngModel)]="selectedItems" 
               formControlName="selectedItems" 
               [settings]="dropdownSettings" 
               (onSelect)="onItemSelect($event)" 
@@ -38,7 +44,6 @@
               (onSelectAll)="onSelectAll($event)"
               (onDeSelectAll)="onDeSelectAll($event)">
             </angular2-multiselect>
-            
           </div>
         </div>
         
@@ -83,7 +88,7 @@
         <br>
         <div id="success"></div>
         <div class="form-group">
-          <button class="btn btn-primary btn-xl" id="sendMessageButton" [disabled]="!registerForm.valid">등록</button>
+          <button class="btn btn-primary btn-xl" id="sendMessageButton" [disabled]="!registerForm.valid">변경</button>
         </div>
       </form>
     </div>
