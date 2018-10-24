@@ -21,10 +21,11 @@ export class ImageComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
 
-  current_user:any={};
-
   // modal
   modal_item:any={};
+
+  current_user:any={};
+  current_user_role:any={};
 
   constructor(private formBuilder: FormBuilder,
     private _imageService:ImageService,
@@ -33,18 +34,21 @@ export class ImageComponent implements OnInit {
       description: [''],
       file: ['', Validators.required]
     });
-  }
 
-  ngOnInit() {
     this.userService.getUserSession().subscribe(data =>{
-      console.log(data);
       this.current_user=data['user'];
+      this.current_user_role=data['role'];
     }
     ,
     (err)=>{
-        console.log(err,err.message);
+        window.location.href='/admin/login';
       }
-    );
+    );  
+
+  }
+
+  ngOnInit() {
+    
     this.getImageList();
 
     new ClipboardJS('#btnCopy');
@@ -58,7 +62,6 @@ export class ImageComponent implements OnInit {
   }
 
   pageChanged(event:any){
-    console.log('event',event);
     this.p = event;
     this.getImageList();
   }
@@ -66,12 +69,8 @@ export class ImageComponent implements OnInit {
   getImageList(){
     
     this._imageService.getImageList(this.p-1, this.size).subscribe(data => {
-      console.log(data);
-      
       this.collection = data['content'];
       this.total= data['totalElements'];
-      
-      console.log('this.total',this.total);
       this.show = false; 
     }
     ,
@@ -83,7 +82,6 @@ export class ImageComponent implements OnInit {
 
   deleteImage(id) {
     this._imageService.deleteImage(id).subscribe(data =>{
-      console.log(data);
       this.getImageList();
     }
     ,
@@ -94,7 +92,6 @@ export class ImageComponent implements OnInit {
   }
 
   setValue(item){
-    console.log(item.fileName);
     this.modal_item = item;
   }
 
@@ -105,13 +102,10 @@ export class ImageComponent implements OnInit {
   // form summit
   onSubmit(files: FileList) {
 
-    console.log('onSubmit');
-
     this.submitted = true;
     const formValue = this.registerForm.value;
     // stop here if form is invalid
     if (this.registerForm.invalid) {
-        console.log('Invaild');
         return;
     }
 
@@ -121,12 +115,8 @@ export class ImageComponent implements OnInit {
     formData.append('description', formValue.description);
     formData.append('uploader', this.current_user.username);
     
-    console.log(formData);
-    
-    
     this._imageService.postImage(formData)
       .subscribe(res => {
-        console.log(res);
         this.getImageList();
     });
     

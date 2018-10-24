@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Router } from '@angular/router';
 import { ForumService } from '../../../../services/forum.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-qna-write',
@@ -22,9 +23,13 @@ export class QnaWriteComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
 
+  current_user:any={};
+  current_user_role:any={};
+  
   constructor(
               private formBuilder: FormBuilder, 
               private forumService:ForumService,
+              private userService:UserService,
               private router: Router) {
     
     this.registerForm = this.formBuilder.group({
@@ -33,6 +38,15 @@ export class QnaWriteComponent implements OnInit {
       file: ['']
     });
       
+    this.userService.getUserSession().subscribe(data =>{
+      this.current_user=data['user'];
+      this.current_user_role=data['role'];
+    }
+    ,
+    (err)=>{
+        window.location.href='/admin/login';
+      }
+    );  
   }
 
   ngOnInit() {
@@ -49,8 +63,6 @@ export class QnaWriteComponent implements OnInit {
   onFileChange(files: FileList) {
     const reader = new FileReader();
  
-    console.log('onFileChange:'+event);
-
     if (files && files.length > 0) {
       
       // For Preview
@@ -77,15 +89,11 @@ export class QnaWriteComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.registerForm.invalid) {
-        console.log('Invaild');
         return;
     }
 
     //alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value))
     const formData = new FormData();
-
-    console.log(this.registerForm);
-    console.log(files);
 
     const formValue = this.registerForm.value;
 
@@ -95,13 +103,9 @@ export class QnaWriteComponent implements OnInit {
     formData.append('title', formValue.title);
     formData.append('content', formValue.content);
     formData.append('category',  'qna');
-   
-    console.log(formData);
-    
     this.forumService.postQna(formData)
       .subscribe(res => {
         this.router.navigate(['/forum/qna']);
-        console.log(res);
     });
     
   }

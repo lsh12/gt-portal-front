@@ -4,6 +4,7 @@ import '../../../../common/ckeditor.loader';
 import 'ckeditor';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ForumService } from '../../../../services/forum.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-guide-detail',
@@ -18,6 +19,7 @@ export class GuideDetailComponent implements OnInit {
   topic_answers:Array<any>=[];
   topic_attach_file:Array<any>=[];
   current_user:any={};
+  current_user_role:any={};
 
   // answer
   ckeditorContent: string = '<p>Some html</p>';
@@ -27,7 +29,12 @@ export class GuideDetailComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
 
-  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private _forumService:ForumService, private router: Router) {
+  constructor( 
+          private route: ActivatedRoute, 
+          private formBuilder: FormBuilder, 
+          private _forumService:ForumService, 
+          private userService:UserService,
+          private router: Router) {
     this.route.params.subscribe(res => 
       this.topic_id=res.id
     );
@@ -36,16 +43,25 @@ export class GuideDetailComponent implements OnInit {
       content: ['', Validators.required],
     });
 
+    this.userService.getUserSession().subscribe(data =>{
+      this.current_user=data['user'];
+      this.current_user_role=data['role'];
+    }
+    ,
+    (err)=>{
+        console.log(err,err.message);
+      }
+    );
+
+
   }
 
   ngOnInit() {
-    console.log('GuideDetail');
     this.getGuideDetail();
   }
 
   getGuideDetail() {
     this._forumService.getGuideDetail(this.topic_id).subscribe(data =>{
-      console.log(data);
       this.topic_data=data;
       this.topic_user=data['user'];
       this.topic_answers=data['answers'];
@@ -56,26 +72,12 @@ export class GuideDetailComponent implements OnInit {
         console.log(err,err.message);
       }
     );
-    
-    /*
-    this._forumUserService.getUserSession().subscribe(data =>{
-      console.log(data);
-      this.current_user=data['user'];
-     
-    }
-    ,
-    (err)=>{
-        console.log(err,err.message);
-      }
-    );
-    */
+
   }
 
   downloadFile(attach_file) {
-    console.log('downloadFile:'+attach_file.id);
-
+    
     this._forumService.downloadByFileUrl(attach_file.fileDownloadUri).subscribe(data =>{
-      console.log(data);
       
       window.URL.createObjectURL(data);
 
@@ -97,41 +99,31 @@ export class GuideDetailComponent implements OnInit {
 
   }
 
-
   // form summit
   onSubmit(files: FileList) {
     this.submitted = true;
 
     // stop here if form is invalid
     if (this.registerForm.invalid) {
-        console.log('Invaild');
         return;
     }
 
     //alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value))
     const formData = new FormData();
 
-    console.log(this.registerForm);
-    console.log(files);
-
     const formValue = this.registerForm.value;
 
     formData.append('content', formValue.content);
-    
-    console.log(formData);
     this._forumService.postGuideAnswer(this.topic_data.id, formData)
       .subscribe(res => {
         this.getGuideDetail();
-        console.log(res);
     });
     
   }
 
   // delete guide
   deleteGuide(){
-    console.log(this.topic_data.id);
     this._forumService.deleteGuide(this.topic_data.id).subscribe(data =>{
-      console.log(data);
       this.router.navigate(['/forum/guide']);
     }
     ,
@@ -140,5 +132,17 @@ export class GuideDetailComponent implements OnInit {
       }
     );
   } 
+
+  // remove answer
+  removeAnswer(id){
+    this._forumService.deleteAnswer(id).subscribe(data =>{
+      this.getGuideDetail();
+    }
+    ,
+    (err)=>{
+        console.log(err,err.message);
+      }
+    );
+  }
 
 }

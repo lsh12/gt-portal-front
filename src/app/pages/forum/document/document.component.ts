@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ForumService } from 'src/app/services/forum.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-document',
@@ -14,13 +15,21 @@ export class DocumentComponent implements OnInit {
   size: number = 5;
   total:number = 0;
   collection: any[] = []; 
-  
-  constructor(private _forumService:ForumService) { 
-    
+  current_user:any={};
+  current_user_role:any={};
+  constructor(private _forumService:ForumService, private userService:UserService) { 
+    this.userService.getUserSession().subscribe(data =>{
+      this.current_user=data['user'];
+      this.current_user_role=data['role'];
+    }
+    ,
+    (err)=>{
+        window.location.href='/admin/login';
+      }
+    );  
   }
 
   ngOnInit() {
-    console.log('DocumentList');
     this.getDocumentList();
   }
 
@@ -31,7 +40,6 @@ export class DocumentComponent implements OnInit {
   }
 
   pageChanged(event:any){
-    console.log('event',event);
     this.p = event;
     this.getDocumentList();
   }
@@ -39,13 +47,10 @@ export class DocumentComponent implements OnInit {
   getDocumentList(){
     
     this._forumService.getDocumentList(this.p-1, this.size).subscribe(data => {
-      console.log(data);
-      
       this.collection = data['content'];
       //this.size= data['size'];
       this.total= data['totalElements'];
       
-      console.log('this.total',this.total);
       this.show = false; 
     }
     ,

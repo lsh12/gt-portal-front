@@ -4,11 +4,11 @@
     <div class="container">
       <h1 class="jumbotron-heading">이미지 관리</h1>
       <p class="lead text-muted">가이드나 안내 문서를 작성시 본문에 삽입되는 이미지를 관리합니다. 원하는 이미지의 상세 버튼을 클릭하고 이미지 URL을 선택하여 본문 HTML에 입력하시기 바랍니다.</p>
-      <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target=".upload-image-modal">이미지 올리기</button>
+      <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target=".upload-image-modal" *ngIf="current_user_role == 'portaladministrators'">이미지 올리기</button>
     </div>
   </section>
 
-  <div class="album py-5 bg-light">
+  <div class="album py-5 bg-light" *ngIf="current_user_role == 'portaladministrators'">
     <div class="container">
 
       <div class="row">

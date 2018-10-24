@@ -7,19 +7,31 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#">Main</a>
+          <a class="nav-link" href="/admin" *ngIf="current_user && current_user_role == 'portaladministrators'">Main</a>
+          <a class="nav-link" href="/admin/app/dashboard" *ngIf="current_user && current_user_role != 'portaladministrators'">Main</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/api/category">API</a>
+          <a class="nav-link" href="/admin/app/api-catalog">API</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/forum/qna">커뮤니티</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">회원가입</a>
+        {{current_user.size}}
+        <li class="nav-item"  *ngIf="!current_user.id">
+          <a class="nav-link" href="/admin/login">로그인</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">로그인</a>
+        <li class="nav-item dropdown" *ngIf="current_user.id">
+          <a class="nav-link dropdown-toggle" href="/admin/my-profile" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{current_user.username}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/admin/logout">로그아웃</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/admin/my-profile">프로필</a>
+          </div>
+        </li>
+        <li class="nav-item" >
+            <a class="nav-link" href="/admin/app/registration">회원가입</a>
         </li>
       </ul>
     </div>

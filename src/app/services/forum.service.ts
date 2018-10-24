@@ -27,8 +27,6 @@ export class ForumService {
   }
 
   getGuideSpectator() {
-    console.log(urls.spectatorUrl);
-    
     return this._http.get(urls.spectatorUrl);
   }
 
@@ -73,6 +71,10 @@ export class ForumService {
 
   postQnaAnswer(topicId,formData) {
     return this._http.post(urls.answerTopicUrl+'/'+topicId, formData);
+  }
+
+  deleteAnswer(id) {
+    return this._http.delete(urls.answerUrl+'/'+id);
   }
 
   postGuide(formData) {

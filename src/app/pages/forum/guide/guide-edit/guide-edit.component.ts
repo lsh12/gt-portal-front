@@ -4,6 +4,7 @@ import '../../../../common/ckeditor.loader';
 import 'ckeditor';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ForumService } from '../../../../services/forum.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-guide-edit',
@@ -17,8 +18,7 @@ export class GuideEditComponent implements OnInit {
   topic_user:any={};
   topic_answers:Array<any>=[];
   topic_attach_file:Array<any>=[];
-  current_user:any={};
-
+  
   // answer
   ckeditorContent: string = '<p>Some html</p>';
   ckeditorConfig: any;
@@ -39,7 +39,14 @@ export class GuideEditComponent implements OnInit {
 
   isSubTitle: boolean = false;
 
-  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private _forumService:ForumService, private router: Router) {
+  current_user:any={};
+  current_user_role:any={};
+
+  constructor(  private route: ActivatedRoute, 
+                private formBuilder: FormBuilder, 
+                private _forumService:ForumService,
+                private userService:UserService, 
+                private router: Router) {
     this.route.params.subscribe(res => 
       this.topic_id=res.id
     );
@@ -53,8 +60,18 @@ export class GuideEditComponent implements OnInit {
       selectedItems: [[]]
     });
     
+    this.userService.getUserSession().subscribe(data =>{
+      this.current_user=data['user'];
+      this.current_user_role=data['role'];
+    }
+    ,
+    (err)=>{
+        window.location.href='/admin/login';
+      }
+    );  
+
+
     this._forumService.getGuideSpectator().subscribe(data =>{
-      console.log(data);
       this.dropdownList = data;
     }
     ,
@@ -75,19 +92,14 @@ export class GuideEditComponent implements OnInit {
       groupBy: "category"
     };
 
-    
-
-
   }
 
   ngOnInit() {
     this.getGuideEdit();
-
   }
 
   getGuideEdit() {
     this._forumService.getGuideEdit(this.topic_id).subscribe(data =>{
-      console.log(data);
       this.topic_data=data['topic'];
       this.topic_user=this.topic_data['user'];
       this.topic_answers=this.topic_data['answers'];
@@ -112,18 +124,6 @@ export class GuideEditComponent implements OnInit {
       }
     );
     
-    /*
-    this._forumUserService.getUserSession().subscribe(data =>{
-      console.log(data);
-      this.current_user=data['user'];
-     
-    }
-    ,
-    (err)=>{
-        console.log(err,err.message);
-      }
-    );
-    */
   }
   
   //event handler for the select element's change event
@@ -134,12 +134,10 @@ export class GuideEditComponent implements OnInit {
     switch(this.selectedTemplate) {
       
       case "guide" : {
-        console.log(this.selectedTemplate);  
         this.showPermit = 1;
         break;
       }
       case "document" : {
-        console.log(this.selectedTemplate);
         this.showPermit = 0;
         break;
       }
@@ -147,14 +145,11 @@ export class GuideEditComponent implements OnInit {
 
   }
   
-  // 첨부파일
   get f() { return this.registerForm.controls; }
 
   onFileChange(files: FileList) {
     const reader = new FileReader();
  
-    console.log('onFileChange:'+event);
-
     if (files && files.length > 0) {
       
       // For Preview
@@ -171,10 +166,8 @@ export class GuideEditComponent implements OnInit {
   }
 
   downloadFile(attach_file) {
-    console.log('downloadFile:'+attach_file.id);
-
+    
     this._forumService.downloadByFileUrl(attach_file.fileDownloadUri).subscribe(data =>{
-      console.log(data);
       
       window.URL.createObjectURL(data);
 
@@ -198,7 +191,6 @@ export class GuideEditComponent implements OnInit {
 
   deleteFile(attach_file) {
     this._forumService.deleteAttachFile(attach_file.id).subscribe(data =>{
-      console.log(data);
       this.getGuideEdit();
     }
     ,
@@ -222,15 +214,11 @@ export class GuideEditComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.registerForm.invalid) {
-        console.log('Invaild');
         return;
     }
 
     //alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value))
     const formData = new FormData();
-
-    console.log(this.registerForm);
-    console.log(files);
 
     if(files[0]){
       formData.append('file', files[0]);
@@ -249,13 +237,7 @@ export class GuideEditComponent implements OnInit {
       }
       permitMember = permitMember+','+formValue.selectedItems[item].id;
     } 
-
-    console.log(permitMember);
-
     formData.append('permit',permitMember);
-
-    console.log(formData);
-    
     this._forumService.updateGuide(this.topic_id,formData)
       .subscribe(res => {
 
@@ -265,26 +247,22 @@ export class GuideEditComponent implements OnInit {
         else {
           this.router.navigate(['/forum/guide']);
         }
-        console.log(res);
+        
     });
   }
 
   // multi drop list
   onItemSelect(item: any) {
-    console.log(item);
-    console.log(this.registerForm.get('selectedItems').value);
+    
   }
   OnItemDeSelect(item: any) {
-      console.log(item);
-      console.log(this.registerForm.get('selectedItems').value);
+      
   }
   onSelectAll(items: any) {
-      console.log(items);
-      console.log(this.registerForm.get('selectedItems').value);
+      
   }
   onDeSelectAll(items: any) {
-      console.log(items);
-      console.log(this.registerForm.get('selectedItems').value);
+      
   }
 
 

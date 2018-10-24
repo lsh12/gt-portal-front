@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Router } from '@angular/router';
 import { ForumService } from '../../../../services/forum.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-guide-write',
@@ -34,10 +35,13 @@ export class GuideWriteComponent implements OnInit {
   selectedTemplate: string = '';
 
   isSubTitle: boolean = false;
+  current_user:any={};
+  current_user_role:any={};
 
   constructor(
               private formBuilder: FormBuilder, 
               private forumService:ForumService,
+              private userService:UserService,
               private router: Router
   ) {
     
@@ -60,7 +64,15 @@ export class GuideWriteComponent implements OnInit {
       badgeShowLimit: 5,
       groupBy: "category"
     };
-
+    this.userService.getUserSession().subscribe(data =>{
+      this.current_user=data['user'];
+      this.current_user_role=data['role'];
+    }
+    ,
+    (err)=>{
+        console.log(err,err.message);
+      }
+    );
   }
 
   ngOnInit() {
@@ -88,12 +100,10 @@ export class GuideWriteComponent implements OnInit {
     switch(this.selectedTemplate) {
       
       case "guide" : {
-        console.log(this.selectedTemplate);  
         this.showPermit = 1;
         break;
       }
       case "document" : {
-        console.log(this.selectedTemplate);
         this.showPermit = 0;
         break;
       }
@@ -107,8 +117,6 @@ export class GuideWriteComponent implements OnInit {
   onFileChange(files: FileList) {
     const reader = new FileReader();
  
-    console.log('onFileChange:'+event);
-
     if (files && files.length > 0) {
       
       // For Preview
@@ -143,15 +151,11 @@ export class GuideWriteComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.registerForm.invalid) {
-        console.log('Invaild');
         return;
     }
 
     //alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value))
     const formData = new FormData();
-
-    console.log(this.registerForm);
-    console.log(files);
 
     if(files[0]){
       formData.append('file', files[0]);
@@ -171,13 +175,7 @@ export class GuideWriteComponent implements OnInit {
       permitMember = permitMember+','+formValue.selectedItems[item].id;
     } 
 
-    console.log(permitMember);
-
     formData.append('permit',permitMember);
-
-    console.log(formData);
-    
-    
     this.forumService.postGuide(formData)
       .subscribe(res => {
         if(formValue.category == 'document') {
@@ -192,19 +190,11 @@ export class GuideWriteComponent implements OnInit {
 
   // multi drop list
   onItemSelect(item: any) {
-    console.log(item);
-    console.log(this.registerForm.get('selectedItems').value);
   }
   OnItemDeSelect(item: any) {
-      console.log(item);
-      console.log(this.registerForm.get('selectedItems').value);
   }
   onSelectAll(items: any) {
-      console.log(items);
-      console.log(this.registerForm.get('selectedItems').value);
   }
   onDeSelectAll(items: any) {
-      console.log(items);
-      console.log(this.registerForm.get('selectedItems').value);
   }
 }

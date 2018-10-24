@@ -1,5 +1,5 @@
-//export const base_prefix = '/gtapi';
-export const base_prefix = 'http://apipt.genesis.tech:8080/gtapi';
+export const base_prefix = '/gtapi';
+//export const base_prefix = 'http://apipt.genesis.tech:8080/gtapi';
 
 export const forum_topic_list = '/api/v1/topics';
 export const forum_answer_list = '/api/v1/answers';
@@ -31,6 +31,7 @@ export const forum_images = '/api/v1/files/images';
 export const userSessionUrl = base_prefix + forum_user_session;
 export const topicUrl = base_prefix + forum_topic_list;
 
+export const answerUrl = base_prefix + forum_answer_list;
 export const answerTopicUrl = base_prefix + forum_topics_answer;
 
 export const qnaListUrl = base_prefix + forum_topics_qna_list;

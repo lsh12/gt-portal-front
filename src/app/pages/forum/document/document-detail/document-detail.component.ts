@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ForumService } from '../../../../services/forum.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-document-detail',
@@ -14,8 +15,7 @@ export class DocumentDetailComponent implements OnInit {
   topic_user:any={};
   topic_answers:Array<any>=[];
   topic_attach_file:Array<any>=[];
-  current_user:any={};
-
+  
   // answer
   ckeditorContent: string = '<p>Some html</p>';
   ckeditorConfig: any;
@@ -23,11 +23,26 @@ export class DocumentDetailComponent implements OnInit {
   // form
   registerForm: FormGroup;
   submitted = false;
-
-  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private _forumService:ForumService, private router: Router) {
+  current_user:any={};
+  current_user_role:any={};
+  constructor(
+      private route: ActivatedRoute, 
+      private formBuilder: FormBuilder, 
+      private _forumService:ForumService,
+      private userService:UserService,
+      private router: Router) {
     this.route.params.subscribe(res => 
       this.topic_subTitle=res.subTitle
     );
+    this.userService.getUserSession().subscribe(data =>{
+      this.current_user=data['user'];
+      this.current_user_role=data['role'];
+    }
+    ,
+    (err)=>{
+        window.location.href='/admin/login';
+      }
+    );  
   }
 
   ngOnInit() {
@@ -36,7 +51,6 @@ export class DocumentDetailComponent implements OnInit {
 
   getDocumentDetail() {
     this._forumService.getDocumentDetail(this.topic_subTitle).subscribe(data =>{
-      console.log(data);
       this.topic_data=data;
       this.topic_user=data['user'];
       this.topic_answers=data['answers'];
@@ -57,11 +71,7 @@ export class DocumentDetailComponent implements OnInit {
   }
 
   downloadFile(attach_file) {
-    console.log('downloadFile:'+attach_file.id);
-
     this._forumService.downloadByFileUrl(attach_file.fileDownloadUri).subscribe(data =>{
-      console.log(data);
-      
       window.URL.createObjectURL(data);
 
       var url = window.URL.createObjectURL(data);
@@ -84,10 +94,8 @@ export class DocumentDetailComponent implements OnInit {
 
   // delete document
   deleteDocument(){
-    console.log(this.topic_data.id);
     this._forumService.deleteDocument(this.topic_data.id).subscribe(data =>{
-      console.log(data);
-      this.router.navigate(['/forum/guide/write']);
+      this.router.navigate(['/forum/document']);
     }
     ,
     (err)=>{

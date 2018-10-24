@@ -88,9 +88,10 @@
       <div class="media-body">
         
         <h5 class="mt-0">{{answers.user.username}}
-          <span>{{answers.createdDate}}</span></h5>
-        
+          <span>{{answers.createdDate}}</span>
+        </h5>
         <div [innerHTML]="answers.content"></div>
+        <button type="button" class="btn btn-sm btn-outline-secondary " (click)="removeAnswer(answers.id)" *ngIf="current_user.id == answers.user.id ||  current_user_role == 'portaladministrators'">삭제</button> 
         <hr>
       </div>
     </div>
@@ -108,8 +109,8 @@
   <div class="row padding">
     <!-- Post Content Column -->
     <div class="col-lg-12 text-right c-list padding">
-        <button class="btn btn-outline-primary btn-lg" (click)="deleteGuide()">삭 제</button>
-        <a routerLink="/forum/guide/edit/{{topic_data.id}}" class="btn btn-outline-secondary btn-lg">편 집</a>
+        <button class="btn btn-outline-primary btn-lg" (click)="deleteGuide()" *ngIf="current_user_role == 'portaladministrators'">삭 제</button>
+        <a routerLink="/forum/guide/edit/{{topic_data.id}}" class="btn btn-outline-secondary btn-lg" *ngIf="current_user_role == 'portaladministrators'">편 집</a>
         <a routerLink="/forum/guide" class="btn btn-outline-secondary btn-lg">목 록</a>
       </div>
   </div>

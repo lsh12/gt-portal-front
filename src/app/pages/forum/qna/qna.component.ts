@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ForumService } from '../../../services/forum.service';
+import { UserService } from 'src/app/services/user.service';
+import { MockService } from 'src/app/services/mock.service';
 
 @Component({
   selector: 'app-qna',
@@ -12,14 +14,28 @@ export class QnaComponent implements OnInit {
   p: number = 1;
   size: number = 5;
   total:number = 0;
-  collection: any[] = []; 
+  collection: any[] = [];
+
+  current_user:any={};
+  current_user_role:any={};
   
-  constructor(private _forumService:ForumService) { 
+  constructor(private _forumService:ForumService, 
+              private userService:UserService
+             ) { 
     
+    this.userService.getUserSession().subscribe(data =>{
+      this.current_user=data['user'];
+      this.current_user_role=data['role'];
+    }
+    ,
+    (err)=>{
+        window.location.href='/admin/login';
+      }
+    );  
+
   }
 
   ngOnInit() {
-    console.log('QnaList');
     this.getQnaList();
   }
 
@@ -30,7 +46,6 @@ export class QnaComponent implements OnInit {
   }
 
   pageChanged(event:any){
-    console.log('event',event);
     this.p = event;
     this.getQnaList();
   }
@@ -38,12 +53,9 @@ export class QnaComponent implements OnInit {
   getQnaList(){
     
     this._forumService.getQnaList(this.p-1, this.size).subscribe(data => {
-      console.log(data);
       
       this.collection = data['content'];
       this.total= data['totalElements'];
-      
-      console.log('this.total',this.total);
       this.show = false; 
     }
     ,

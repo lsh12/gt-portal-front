@@ -30,8 +30,8 @@
     <div class="row padding">
       <!-- Post Content Column -->
       <div class="col-lg-12 text-right c-list padding">
-          <button class="btn btn-outline-primary btn-lg" (click)="deleteDocument()">삭 제</button>
-          <a routerLink="/forum/guide/edit/{{topic_data.id}}" class="btn btn-outline-secondary btn-lg">편 집</a>
+          <button class="btn btn-outline-primary btn-lg" (click)="deleteDocument()" *ngIf="current_user_role == 'portaladministrators'">삭 제</button>
+          <a routerLink="/forum/guide/edit/{{topic_data.id}}" class="btn btn-outline-secondary btn-lg" *ngIf="current_user_role == 'portaladministrators'">편 집</a>
           <button class="btn btn-outline-secondary btn-lg" id="bakckButton" (click)="onBack()">목 록</button>
       </div>
     </div>

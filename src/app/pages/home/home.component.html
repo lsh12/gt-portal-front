@@ -6,10 +6,10 @@
       <div class="row">
         <div class="col-lg-12 col-md-10 mx-auto">
           <div class="site-heading">
-            <h1>Genesis Technologies API 개발자 포털</h1>
+            <h1>API 개발자 포털</h1>
             <span class="subheading">API를 통해 비즈니스를 주도하는 앱을 제작하시기 바랍니다.</span>
             <br>
-            <button type="button" class="btn btn-outline-light btn-lg">API 보기</button>
+            <a href="/admin/app/api-catalog" class="btn btn-outline-light btn-lg">API 보기</a>
             <a routerLink="/forum/document/detail/overview" class="btn btn-primary btn-lg">시작하기</a>
           </div>
         </div>
@@ -66,7 +66,7 @@
         <div class="col-lg-6 order-lg-1 my-auto showcase-text">
           <h2>API 키 가져 오기</h2>
           <p class="lead mb-0">API 키를 얻으려면 응용 프로그램을 포털에 추가하십시오. 포털은 등록 된 각 응용 프로그램에 고유 한 API 키를 할당합니다. API에 액세스하려면 API 키가 필요합니다. 또한 API 탐색기에서 API를 테스트하려면 API 키가 있어야합니다.</p>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".video-modal">상세보기</button>
+          <button type="button" class="btn btn-primary btn-get-api-key" data-toggle="modal" data-target=".video-modal" data-src="assets/video/get-api-key.mp4">상세보기</button>
         </div>
       </div>
       <div class="row no-gutters">
@@ -74,7 +74,7 @@
         <div class="col-lg-6 my-auto showcase-text">
           <h2>API 테스트</h2>
           <p class="lead mb-0">API 탐색기를 사용하면 거칠거나 wadl 파일이있는 API와 상호 작용할 수 있습니다. 또한 API와 상호 작용하려면 응용 프로그램의 API 키가 필요합니다.</p>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".video-modal">상세보기</button>
+          <button type="button" class="btn btn-primary btn-test-api" data-toggle="modal" data-target=".video-modal" data-src="assets/video/test-apis.mp4">상세보기</button>
         </div>
       </div>
       <div class="row no-gutters">
@@ -82,7 +82,7 @@
         <div class="col-lg-6 order-lg-1 my-auto showcase-text">
           <h2>보고서 생성</h2>
           <p class="lead mb-0">API의 사용 및 대기 시간을 모니터링하려면 포털의 실시간 분석을 사용하십시오. API 및 애플리케이션의 트래픽 추세를 빠르게 시각화합니다. 조직의 할당량 사용량을 추적합니다. 개발자는 조직 고유의 정보에만 액세스 할 수 있습니다.</p>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".video-modal">상세보기</button>
+          <button type="button" class="btn btn-primary btn-generate-reports" data-toggle="modal" data-target=".video-modal" data-src="assets/video/generate-reports.mp4">상세보기</button>
         </div>
       </div>
     </div>
@@ -93,10 +93,14 @@
   <!--- Video Modal -->
   <!-- Large modal -->
   
-  <div class="modal fade video-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div  id="video-modal" class="modal fade video-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        ...
+        <div class="embed-responsive embed-responsive-16by9">
+            <video id="video-player" class="video-fluid z-depth-1" controls muted>
+                <source src="" type="video/mp4" />
+            </video>
+        </div>
       </div>
      </div>
   </div>

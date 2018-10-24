@@ -25,8 +25,7 @@ import { FooterComponent } from './pages/footer/footer.component';
 import { QnaEditComponent } from './pages/forum/qna/qna-edit/qna-edit.component';
 import { GuideEditComponent } from './pages/forum/guide/guide-edit/guide-edit.component';
 import { ImageComponent } from './pages/forum/image/image.component';
-
-
+import * as $ from 'jquery';
 
 @NgModule({
   declarations: [
