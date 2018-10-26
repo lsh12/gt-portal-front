@@ -58,6 +58,12 @@ export class QnaEditComponent implements OnInit {
     this.getQnaDetail();
   }
 
+  ngAfterViewChecked() {
+    CKEDITOR.config.allowedContent=true
+    CKEDITOR.config.fillEmptyBlocks=false;
+    CKEDITOR.config.autoParagraph=false;
+  }
+
   get f() { return this.registerForm.controls; }
 
   onFileChange(files: FileList) {

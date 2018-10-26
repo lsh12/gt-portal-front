@@ -40,7 +40,7 @@ export class DocumentDetailComponent implements OnInit {
     }
     ,
     (err)=>{
-        window.location.href='/admin/login';
+        
       }
     );  
   }

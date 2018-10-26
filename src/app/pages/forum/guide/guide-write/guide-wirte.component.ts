@@ -88,8 +88,9 @@ export class GuideWriteComponent implements OnInit {
   }
 
   ngAfterViewChecked() {
-    CKEDITOR.config.filebrowserUploadUrl = urls.uploadImageFileIdUrl;
-    
+    CKEDITOR.config.allowedContent=true
+    CKEDITOR.config.fillEmptyBlocks=false;
+    CKEDITOR.config.autoParagraph=false;
   }
 
   //event handler for the select element's change event

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import '../../../../common/ckeditor.loader';
 import 'ckeditor';
@@ -46,7 +47,8 @@ export class GuideEditComponent implements OnInit {
                 private formBuilder: FormBuilder, 
                 private _forumService:ForumService,
                 private userService:UserService, 
-                private router: Router) {
+                private router: Router,
+                private _location: Location) {
     this.route.params.subscribe(res => 
       this.topic_id=res.id
     );
@@ -98,6 +100,12 @@ export class GuideEditComponent implements OnInit {
     this.getGuideEdit();
   }
 
+  ngAfterViewChecked() {
+    CKEDITOR.config.allowedContent=true
+    CKEDITOR.config.fillEmptyBlocks=false;
+    CKEDITOR.config.autoParagraph=false;
+  }
+
   getGuideEdit() {
     this._forumService.getGuideEdit(this.topic_id).subscribe(data =>{
       this.topic_data=data['topic'];
@@ -144,7 +152,12 @@ export class GuideEditComponent implements OnInit {
     }
 
   }
-  
+
+  // back
+  onBack() {
+    this._location.back();
+  }
+
   get f() { return this.registerForm.controls; }
 
   onFileChange(files: FileList) {

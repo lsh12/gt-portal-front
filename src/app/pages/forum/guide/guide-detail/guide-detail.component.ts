@@ -59,6 +59,12 @@ export class GuideDetailComponent implements OnInit {
   ngOnInit() {
     this.getGuideDetail();
   }
+  
+  ngAfterViewChecked() {
+    CKEDITOR.config.allowedContent=true
+    CKEDITOR.config.fillEmptyBlocks=false;
+    CKEDITOR.config.autoParagraph=false;
+  }
 
   getGuideDetail() {
     this._forumService.getGuideDetail(this.topic_id).subscribe(data =>{

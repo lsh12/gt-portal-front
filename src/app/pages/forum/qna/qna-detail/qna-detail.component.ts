@@ -55,6 +55,12 @@ export class QnaDetailComponent implements OnInit {
     this.getQnaDetail();
   }
 
+  ngAfterViewChecked() {
+    CKEDITOR.config.allowedContent=true
+    CKEDITOR.config.fillEmptyBlocks=false;
+    CKEDITOR.config.autoParagraph=false;
+  }
+
   getQnaDetail() {
     this._forumService.getQnaDetail(this.topic_id).subscribe(data =>{
       this.topic_data=data;

@@ -54,7 +54,9 @@ export class QnaWriteComponent implements OnInit {
   }
 
   ngAfterViewChecked() {
-    //CKEDITOR.config.filebrowserUploadUrl = urls.uploadImageFileIdUrl;
+    CKEDITOR.config.allowedContent=true
+    CKEDITOR.config.fillEmptyBlocks=false;
+    CKEDITOR.config.autoParagraph=false;
   }
 
   // 첨부파일
