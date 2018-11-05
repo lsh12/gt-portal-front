@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ChartsModule } from 'ng2-charts';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +28,8 @@ import { QnaEditComponent } from './pages/forum/qna/qna-edit/qna-edit.component'
 import { GuideEditComponent } from './pages/forum/guide/guide-edit/guide-edit.component';
 import { ImageComponent } from './pages/forum/image/image.component';
 import * as $ from 'jquery';
+import { ChartsComponent } from './pages/charts/charts.component';
+import { ChartsDoughnutComponent } from './pages/charts/charts-doughnut/charts-doughnut.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +49,8 @@ import * as $ from 'jquery';
     QnaEditComponent,
     GuideEditComponent,
     ImageComponent,
+    ChartsComponent,
+    ChartsDoughnutComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +60,8 @@ import * as $ from 'jquery';
     ReactiveFormsModule,
     CKEditorModule,
     AngularMultiSelectModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    ChartsModule
   ],
   providers: [ {provide: APP_BASE_HREF, useValue: '/gtportal'} ],
   bootstrap: [AppComponent]
