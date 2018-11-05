@@ -15,6 +15,7 @@ import { GuideEditComponent } from './pages/forum/guide/guide-edit/guide-edit.co
 import { ImageComponent } from './pages/forum/image/image.component';
 import { ChartsComponent } from './pages/charts/charts.component';
 import { ChartsDoughnutComponent } from './pages/charts/charts-doughnut/charts-doughnut.component';
+import { ChartsPieComponent } from './pages/charts-pie/charts-pie.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -36,6 +37,7 @@ const routes: Routes = [
 
   { path: 'charts', component: ChartsComponent },
   { path: 'charts/doughtnut', component: ChartsDoughnutComponent },
+  { path: 'charts/pie', component: ChartsPieComponent },
 
   {
     path: '',

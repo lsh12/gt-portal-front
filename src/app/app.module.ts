@@ -30,6 +30,7 @@ import { ImageComponent } from './pages/forum/image/image.component';
 import * as $ from 'jquery';
 import { ChartsComponent } from './pages/charts/charts.component';
 import { ChartsDoughnutComponent } from './pages/charts/charts-doughnut/charts-doughnut.component';
+import { ChartsPieComponent } from './pages/charts-pie/charts-pie.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { ChartsDoughnutComponent } from './pages/charts/charts-doughnut/charts-d
     GuideEditComponent,
     ImageComponent,
     ChartsComponent,
-    ChartsDoughnutComponent
+    ChartsDoughnutComponent,
+    ChartsPieComponent
   ],
   imports: [
     BrowserModule,
