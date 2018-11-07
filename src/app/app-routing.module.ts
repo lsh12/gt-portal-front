@@ -13,9 +13,6 @@ import { DocumentComponent } from './pages/forum/document/document.component';
 import { QnaEditComponent } from './pages/forum/qna/qna-edit/qna-edit.component';
 import { GuideEditComponent } from './pages/forum/guide/guide-edit/guide-edit.component';
 import { ImageComponent } from './pages/forum/image/image.component';
-import { ChartsComponent } from './pages/charts/charts.component';
-import { ChartsDoughnutComponent } from './pages/charts/charts-doughnut/charts-doughnut.component';
-import { ChartsPieComponent } from './pages/charts-pie/charts-pie.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -34,10 +31,6 @@ const routes: Routes = [
   { path: 'forum/document/detail/:subTitle', component: DocumentDetailComponent },
 
   { path: 'forum/image', component: ImageComponent },
-
-  { path: 'charts', component: ChartsComponent },
-  { path: 'charts/doughtnut', component: ChartsDoughnutComponent },
-  { path: 'charts/pie', component: ChartsPieComponent },
 
   {
     path: '',

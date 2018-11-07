@@ -28,9 +28,6 @@ import { QnaEditComponent } from './pages/forum/qna/qna-edit/qna-edit.component'
 import { GuideEditComponent } from './pages/forum/guide/guide-edit/guide-edit.component';
 import { ImageComponent } from './pages/forum/image/image.component';
 import * as $ from 'jquery';
-import { ChartsComponent } from './pages/charts/charts.component';
-import { ChartsDoughnutComponent } from './pages/charts/charts-doughnut/charts-doughnut.component';
-import { ChartsPieComponent } from './pages/charts-pie/charts-pie.component';
 
 @NgModule({
   declarations: [
@@ -49,10 +46,7 @@ import { ChartsPieComponent } from './pages/charts-pie/charts-pie.component';
     FooterComponent,
     QnaEditComponent,
     GuideEditComponent,
-    ImageComponent,
-    ChartsComponent,
-    ChartsDoughnutComponent,
-    ChartsPieComponent
+    ImageComponent
   ],
   imports: [
     BrowserModule,
