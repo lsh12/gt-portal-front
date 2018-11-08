@@ -34,6 +34,15 @@ export class HeaderComponent implements OnInit {
         console.log(err, err.message);
       }
     );
+
+    /***
+     * browserlang 
+     * defalut language is set app.module 
+     * templory set active language is browserlanguage
+     
+      this.translate.activeLang = this.translate.getBrowserLanguage();
+    */
+    
     this.current_lang = this.translate.activeLang;
     console.log("translate.activeLang:" + this.translate.activeLang);
   }

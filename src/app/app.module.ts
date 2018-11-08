@@ -29,7 +29,7 @@ import { ImageComponent } from './pages/forum/image/image.component';
 import * as $ from 'jquery';
 
 export function setupTranslateFactory(service: TranslateService): Function {
-  return () => service.use('en');
+  return () => service.use('ko');
 }
 
 @NgModule({
@@ -62,8 +62,7 @@ export function setupTranslateFactory(service: TranslateService): Function {
     NgxPaginationModule,
     ChartsModule,
     TranslateModule.forRoot({
-      debugMode: true,
-      activeLang: 'ko'
+      disableCache: true
     })
   ],
   providers: [
