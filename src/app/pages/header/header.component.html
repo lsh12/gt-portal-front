@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><b>제니시스 기술</b></a>
+    <a class="navbar-brand" href="#"><b>{{ 'intro.header.brand' |  translate }}</b></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -14,7 +14,7 @@
           <a class="nav-link" href="/admin/app/api-catalog">API</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/forum/qna">커뮤니티</a>
+          <a class="nav-link" routerLink="/forum/qna">{{ 'intro.header.community' |  translate }}</a>
         </li>
         {{current_user.size}}
         <li class="nav-item"  *ngIf="!current_user.id">
@@ -32,6 +32,16 @@
         </li>
         <li class="nav-item" >
             <a class="nav-link" href="/admin/app/registration">회원가입</a>
+        </li>
+        <li class="nav-item  dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">{{current_lang}}</a>
+          <div class="dropdown-menu">
+              <ng-template ngFor let-lang [ngForOf]="languages">
+                  <span *ngIf="lang.code !== current_lang">
+                    <a class="dropdown-item" (click)="changeLang(lang.code)">{{lang.label}}</a> </span>
+                  <!--<span *ngIf="lang.code === localeId">{{lang.label}} </span>-->
+                </ng-template>
+          </div>
         </li>
       </ul>
     </div>
