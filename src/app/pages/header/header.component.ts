@@ -34,6 +34,15 @@ export class HeaderComponent implements OnInit {
         console.log(err, err.message);
       }
     );
+    
+    this.translate.activeLangChanged.subscribe(
+      (event: { previousValue: string; currentValue: string }) => {
+        console.log('prev'+event.previousValue);
+        console.log('current'+event.currentValue);
+      }
+    )
+
+    this.translate.load
 
     /***
      * browserlang 

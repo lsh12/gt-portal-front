@@ -28,8 +28,8 @@ import { GuideEditComponent } from './pages/forum/guide/guide-edit/guide-edit.co
 import { ImageComponent } from './pages/forum/image/image.component';
 import * as $ from 'jquery';
 
-export function setupTranslateFactory(service: TranslateService): Function {
-  return () => service.use('ko');
+export function setupTranslateService(service: TranslateService) {
+  return () => service.load();
 }
 
 @NgModule({
@@ -66,10 +66,10 @@ export function setupTranslateFactory(service: TranslateService): Function {
     })
   ],
   providers: [
-    TranslateService,
+    // needed to load translation before application starts
     {
       provide: APP_INITIALIZER,
-      useFactory: setupTranslateFactory,
+      useFactory: setupTranslateService,
       deps: [TranslateService],
       multi: true
     }

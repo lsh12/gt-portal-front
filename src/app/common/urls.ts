@@ -1,5 +1,5 @@
-export const base_prefix = '/gtapi';
-//export const base_prefix = 'http://apipt.genesis.tech:8080/gtapi';
+//export const base_prefix = '/gtapi';
+export const base_prefix = 'http://apipt.genesis.tech:8080/gtapi';
 
 export const forum_topic_list = '/api/v1/topics';
 export const forum_answer_list = '/api/v1/answers';
