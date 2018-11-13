@@ -3,10 +3,26 @@
   "intro": {
     "header": {
       "brand": "GENESIS Technologies",
-      "community": "Community"
+      "community": "Community",
+      "sign-in": "Sign in",
+      "sign-out": "Sign out",
+      "sign-up": "Sign up",
+      "my-profile": "Profile"
     },
     "home": {
-      "site-head": "API Developer Portal"
+      "site-head": "API Developer Portal",
+      "api-explorer": "API Explorer",
+      "overview": "Overview"
+    }
+  },
+  "footer": {
+    "brand": "GENESIS Technologies",
+    "address1": "6F E&C Dream Tower, 146, Seonyu-ro,",
+    "address2": "Yeongdeungpo-gu Seoul, 07255, Korea",
+    "family": {
+      "site": "Family Sites",
+      "site1": "CA Technologies",
+      "site2": "Shinsegae Inc."
     }
   }
 }

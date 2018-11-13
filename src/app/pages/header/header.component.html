@@ -11,27 +11,27 @@
           <a class="nav-link" href="/admin/app/dashboard" *ngIf="current_user && current_user_role != 'portaladministrators'">Main</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/admin/app/api-catalog">API</a>
+          <a class="nav-link" href="/admin/app/api-catalog">APIs</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/forum/qna">{{ 'intro.header.community' |  translate }}</a>
         </li>
         {{current_user.size}}
         <li class="nav-item"  *ngIf="!current_user.id">
-          <a class="nav-link" href="/admin/login">로그인</a>
+          <a class="nav-link" href="/admin/login">{{ 'intro.header.sign-in' |  translate }}</a>
         </li>
         <li class="nav-item dropdown" *ngIf="current_user.id">
           <a class="nav-link dropdown-toggle" href="/admin/my-profile" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{current_user.username}}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/admin/logout">로그아웃</a>
+            <a class="dropdown-item" href="/admin/logout">{{ 'intro.header.sign-out' |  translate }}</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/admin/my-profile">프로필</a>
+            <a class="dropdown-item" href="/admin/my-profile">{{ 'intro.header.my-profile' |  translate }}</a>
           </div>
         </li>
         <li class="nav-item" >
-            <a class="nav-link" href="/admin/app/registration">회원가입</a>
+            <a class="nav-link" href="/admin/app/registration">{{ 'intro.header.sign-up' |  translate }}</a>
         </li>
         <li class="nav-item  dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">{{current_lang}}</a>

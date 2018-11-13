@@ -25,7 +25,16 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.getUserSession().subscribe(data => {
+    // this.userService.getUserSession().subscribe(data => {
+    //   this.current_user = data['user'];
+    //   this.current_user_role = data['role'];
+    // }
+    //   ,
+    //   (err) => {
+    //     console.log(err, err.message);
+    //   }
+    // );
+    this.mockService.getUserSession().subscribe(data => {
       this.current_user = data['user'];
       this.current_user_role = data['role'];
     }
@@ -44,14 +53,6 @@ export class HeaderComponent implements OnInit {
 
     this.translate.load
 
-    /***
-     * browserlang 
-     * defalut language is set app.module 
-     * templory set active language is browserlanguage
-     
-      this.translate.activeLang = this.translate.getBrowserLanguage();
-    */
-    
     this.current_lang = this.translate.activeLang;
     console.log("translate.activeLang:" + this.translate.activeLang);
   }
