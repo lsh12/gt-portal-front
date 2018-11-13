@@ -1,12 +1,29 @@
 {
-  "TITLE": "GENESIS Technologies",
+  "TITLE": "제니시스기술",
   "intro": {
     "header": {
       "brand": "제니시스기술",
-      "community": "커뮤니티"
+      "community": "커뮤니티",
+      "sign-in": "로그인",
+      "sign-out": "로그아웃",
+      "sign-up": "회원가입",
+      "my-profile": "프로필"
     },
     "home": {
-      "site-head": "API 개발자 포털"
+      "site-head": "API 개발자 포털",
+      "api-explorer": "API 보기",
+      "overview": "시작하기"
+    }
+  },
+  "footer": {
+    "brand": "제니시스기술",
+    "address1": "07255 서울특별시 영등포구 선유로 146",
+    "address2": "이앤씨드립타워 601호",
+    "family": {
+      "site": "패밀리사이트",
+      "site1": "CA Technologies",
+      "site2": "신세계아이앤씨"
     }
   }
+
 }

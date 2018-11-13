@@ -62,7 +62,8 @@ export function setupTranslateService(service: TranslateService) {
     NgxPaginationModule,
     ChartsModule,
     TranslateModule.forRoot({
-      disableCache: true
+      disableCache: true,
+      debugMode: true,
     })
   ],
   providers: [
