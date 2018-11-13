@@ -27,6 +27,7 @@ import { QnaEditComponent } from './pages/forum/qna/qna-edit/qna-edit.component'
 import { GuideEditComponent } from './pages/forum/guide/guide-edit/guide-edit.component';
 import { ImageComponent } from './pages/forum/image/image.component';
 import * as $ from 'jquery';
+import { LoginComponent } from './auth/login/login.component';
 
 export function setupTranslateService(service: TranslateService) {
   return () => service.load();
@@ -49,7 +50,8 @@ export function setupTranslateService(service: TranslateService) {
     FooterComponent,
     QnaEditComponent,
     GuideEditComponent,
-    ImageComponent
+    ImageComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
