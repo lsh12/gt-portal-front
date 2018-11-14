@@ -1,6 +1,6 @@
 // export const base_prefix = '/gtapi';
-export const base_prefix = 'http://apipt.genesis.tech:8080/gtapi';
-
+import { environment } from './../../environments/environment';
+export const base_prefix = environment.base_prefix;
 
 export const forum_topic_list = '/api/v1/topics';
 export const forum_answer_list = '/api/v1/answers';
@@ -29,6 +29,8 @@ export const delete_attach_file = '/api/v1/files/deleteAttachFile';
 
 export const forum_images = '/api/v1/files/images';
 
+export const api_list = '/papi/v1/apis';
+
 export const userSessionUrl = base_prefix + forum_user_session;
 export const topicUrl = base_prefix + forum_topic_list;
 
@@ -53,3 +55,5 @@ export const documentDeleteUrl = base_prefix + forum_topics_document_delete;
 export const uploadImageFileIdUrl = base_prefix + upload_image_file;
 export const deleteAttchFileUrl = base_prefix + delete_attach_file;
 export const imagesUrl = base_prefix + forum_images;
+
+export const apiListUrl = base_prefix + api_list;
