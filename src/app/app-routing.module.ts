@@ -15,6 +15,8 @@ import { GuideEditComponent } from './pages/forum/guide/guide-edit/guide-edit.co
 import { ImageComponent } from './pages/forum/image/image.component';
 
 const routes: Routes = [
+  { path: 'components', loadChildren: './components/components.module#ComponentsModule' },
+  
   { path: 'home', component: HomeComponent },
   { path: 'forum', component: ForumComponent },
   { path: 'forum/guide', component: GuideComponent },
@@ -31,16 +33,9 @@ const routes: Routes = [
   { path: 'forum/document/detail/:subTitle', component: DocumentDetailComponent },
 
   { path: 'forum/image', component: ImageComponent },
-
-  {
-    path: '',
-    redirectTo: '/home',
-    pathMatch: 'full',
-  }, 
-  {
-    path: '**',
-    component: HomeComponent,
-  }
+ 
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home' },
 ];
 
 @NgModule({

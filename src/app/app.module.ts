@@ -1,12 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ChartsModule } from 'ng2-charts';
-import { TranslateModule, TranslateService } from '@ngstack/translate';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatAutocompleteModule,
@@ -68,12 +67,14 @@ import { ImageComponent } from './pages/forum/image/image.component';
 import * as $ from 'jquery';
 import { LoginComponent } from './auth/login/login.component';
 import { HomeFooterComponent } from './pages/home/home-footer/home-footer.component';
-
-
-export function setupTranslateService(service: TranslateService) {
-  return () => service.load();
+import { SharedModule } from './common/shared.module';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+/*
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient, 'assets/i18n/', '.json');
 }
-
+*/
 @NgModule({
   declarations: [
     AppComponent,
@@ -105,22 +106,15 @@ export function setupTranslateService(service: TranslateService) {
     AngularMultiSelectModule,
     NgxPaginationModule,
     ChartsModule,
-    TranslateModule.forRoot({
-      disableCache: true,
-      debugMode: false,
-    }),
+    
     BrowserAnimationsModule,
     MatIconModule,
+    SharedModule,
+    
   ],
   providers: [
-    // needed to load translation before application starts
-    {
-      provide: APP_INITIALIZER,
-      useFactory: setupTranslateService,
-      deps: [TranslateService],
-      multi: true
-    }
-],
+    
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

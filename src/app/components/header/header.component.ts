@@ -20,15 +20,28 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    //this.userService.getUserSession().subscribe(data => {
+    // this.userService.getUserSession().subscribe(data => {
+    //   this.current_user = data['user'];
+    //   this.current_user_role = data['role'];
+    // }
+    //   ,
+    //   (err) => {
+    //     console.log(err, err.message);
+    //   }
+    // );
     this.mockService.getUserSession().subscribe(data => {
       this.current_user = data['user'];
       this.current_user_role = data['role'];
+
+      console.log(data);
+
     }
       ,
       (err) => {
         console.log(err, err.message);
       }
     );
+    
   }
+
 }
