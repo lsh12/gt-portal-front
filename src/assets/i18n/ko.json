@@ -7,7 +7,8 @@
       "sign-in": "로그인",
       "sign-out": "로그아웃",
       "sign-up": "회원가입",
-      "my-profile": "프로필"
+      "my-profile": "프로필",
+      "monitor": "통계"
     },
     "home": {
       "site-head": "API 개발자 포털",

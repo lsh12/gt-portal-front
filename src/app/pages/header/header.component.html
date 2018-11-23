@@ -16,6 +16,9 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/forum/qna">{{ 'intro.header.community' |  translate }}</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/monitor">{{ 'intro.header.monitor' |  translate }}</a>
+          </li>
         {{current_user.size}}
         <li class="nav-item"  *ngIf="!current_user.id">
           <a class="nav-link" href="/admin/login">{{ 'intro.header.sign-in' |  translate }}</a>

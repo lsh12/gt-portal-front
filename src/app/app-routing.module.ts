@@ -16,6 +16,7 @@ import { ImageComponent } from './pages/forum/image/image.component';
 
 const routes: Routes = [
   { path: 'components', loadChildren: './components/components.module#ComponentsModule' },
+  { path: 'monitor', loadChildren: './pages/monitor/monitor.module#MonitorModule' },
   
   { path: 'home', component: HomeComponent },
   { path: 'forum', component: ForumComponent },

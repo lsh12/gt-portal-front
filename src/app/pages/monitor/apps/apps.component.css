@@ -1,0 +1,148 @@
+
+  .sidenav-container {
+    position: relative;
+    height: 100%;
+  }
+  
+  .sidenav {
+    position: relative;
+    width: 15em;
+    box-shadow: 0.2em 0 0.4em rgba(0,0,0,.24);
+  }
+  
+  /*!
+   * Start Bootstrap - SB Admin v5.0.2 (https://startbootstrap.com/template-overviews/sb-admin)
+   * Copyright 2013-2018 Start Bootstrap
+   * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-sb-admin/blob/master/LICENSE)
+   */
+  
+   html {
+    position: relative;
+    min-height: 100%;
+  }
+  
+  body {
+    height: 100%;
+  }
+  
+  #wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  
+  #wrapper #content-wrapper {
+    overflow-x: hidden;
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 80px;
+  }
+  
+  body.fixed-nav #content-wrapper {
+    margin-top: 56px;
+    padding-left: 90px;
+  }
+  
+  body.fixed-nav.sidebar-toggled #content-wrapper {
+    padding-left: 0;
+  }
+  
+  @media (min-width: 768px) {
+    body.fixed-nav #content-wrapper {
+      padding-left: 225px;
+    }
+    body.fixed-nav.sidebar-toggled #content-wrapper {
+      padding-left: 90px;
+    }
+  }
+  
+  .scroll-to-top {
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+    display: none;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    color: #fff;
+    background: rgba(52, 58, 64, 0.5);
+    line-height: 46px;
+  }
+  
+  .scroll-to-top:focus, .scroll-to-top:hover {
+    color: white;
+  }
+  
+  .scroll-to-top:hover {
+    background: #343a40;
+  }
+  
+  .scroll-to-top i {
+    font-weight: 800;
+  }
+  
+  
+  
+  .navbar-nav .form-inline .input-group {
+    width: 100%;
+  }
+  
+  .navbar-nav .nav-item.active .nav-link {
+    color: #fff;
+  }
+  
+  .navbar-nav .nav-item.dropdown .dropdown-toggle::after {
+    width: 1rem;
+    text-align: center;
+    float: right;
+    vertical-align: 0;
+    border: 0;
+    font-weight: 900;
+    content: '\f105';
+    font-family: 'Font Awesome 5 Free';
+  }
+  
+  .navbar-nav .nav-item.dropdown.show .dropdown-toggle::after {
+    content: '\f107';
+  }
+  
+  .navbar-nav .nav-item.dropdown.no-arrow .dropdown-toggle::after {
+    display: none;
+  }
+  
+  .navbar-nav .nav-item .nav-link:focus {
+    outline: none;
+  }
+  
+  .navbar-nav .nav-item .nav-link .badge {
+    position: absolute;
+    margin-left: 0.75rem;
+    top: 0.3rem;
+    font-weight: 400;
+    font-size: 0.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .navbar-nav .form-inline .input-group {
+      width: auto;
+    }
+  }
+  
+  .card-body-icon {
+    position: absolute;
+    z-index: 0;
+    top: -1.25rem;
+    right: -1rem;
+    opacity: 0.4;
+    font-size: 5rem;
+    -webkit-transform: rotate(15deg);
+    transform: rotate(15deg);
+  }
+  
+  .card{
+      min-width: 50em;
+  }
+
+  .test{
+    text-align: right;
+  }
